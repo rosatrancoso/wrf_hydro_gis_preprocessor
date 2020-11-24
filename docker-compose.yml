@@ -1,9 +1,13 @@
+# export UID=`id -u`; export GID=`id -g`
 
 ubuntu:
   build: .
   dockerfile: Dockerfile.ubuntu
-
+  tty: True
+  user: $UID:$GID:$USER
 
 debian:
   build: .
   dockerfile: Dockerfile.debian
+  tty: True
+  user: $UID:$GID:$USER

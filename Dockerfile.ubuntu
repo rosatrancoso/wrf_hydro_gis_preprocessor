@@ -6,13 +6,14 @@ USER root
 RUN apt-get update \
 &&  apt-get install -y \
         python3.7  \
-        python3-pip
+        python3-pip \
+        libtk
 
 # install numpy before gdal
-RUN pip install numpy pyproj netCDF4 whitebox
+RUN pip3 install numpy pyproj netCDF4 whitebox 
 
 RUN apt-get install -y gdal-bin libgdal-dev
-RUN pip install gdal==$(gdal-config --version) \
+RUN pip3 install gdal==$(gdal-config --version) \
     --global-option=build_ext \
     --global-option="-I/usr/include/gdal"
 
