@@ -1,0 +1,19 @@
+FROM python:3.7-slim-buster
+LABEL maintainer="rosatrancoso@gmail.com"
+USER root
+
+RUN pip install numpy pyproj netCDF4 whitebox
+RUN apt-get update \
+&&  apt-get install -y \
+        g++ \
+        gdal-bin  \
+        libgdal-dev \
+        libtk
+
+RUN pip install gdal==$(gdal-config --version) \
+    --global-option=build_ext \
+    --global-option="-I/usr/include/gdal"
+
+ADD wrfhydro_gis /source/wrfhydro_gis
+WORKDIR /source/wrfhydro_gis
+

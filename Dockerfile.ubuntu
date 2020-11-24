@@ -1,0 +1,22 @@
+FROM ubuntu
+ARG DEBIAN_FRONTEND=noninteractive
+LABEL maintainer="rosatrancoso@gmail.com"
+USER root
+
+RUN apt-get update \
+&&  apt-get install -y \
+        python3.7  \
+        python3-pip
+
+# install numpy before gdal
+RUN pip install numpy pyproj netCDF4 whitebox
+
+RUN apt-get install -y gdal-bin libgdal-dev
+RUN pip install gdal==$(gdal-config --version) \
+    --global-option=build_ext \
+    --global-option="-I/usr/include/gdal"
+
+ADD wrfhydro_gis /source/wrfhydro_gis
+WORKDIR /source/wrfhydro_gis
+
+

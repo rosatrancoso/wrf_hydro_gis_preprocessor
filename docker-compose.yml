@@ -1,0 +1,9 @@
+
+ubuntu:
+  build: .
+  dockerfile: Dockerfile.ubuntu
+
+
+debian:
+  build: .
+  dockerfile: Dockerfile.debian
