@@ -15,5 +15,7 @@ RUN pip install gdal==$(gdal-config --version) \
     --global-option="-I/usr/include/gdal"
 
 ADD wrfhydro_gis /source/wrfhydro_gis
-WORKDIR /source/wrfhydro_gis
+# run first time as root because it downloads something to
+# /usr/local/lib/python3.7/site-packages/whitebox/
+RUN python /source/wrfhydro_gis/Create_Domain_Boundary_Shapefile.py -h
 
