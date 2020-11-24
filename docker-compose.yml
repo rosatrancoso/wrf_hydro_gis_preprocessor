@@ -11,3 +11,11 @@ debian:
   dockerfile: Dockerfile.debian
   tty: True
   user: $UID:$GID:$USER
+
+dev:
+  image: wrf_hydro_gis_preprocessor_debian
+  tty: True
+  user: $UID:$GID:$USER
+  volumes:
+    - $REPOSMS/rt_scripts:/source/rt_scripts
+    - $HOME/scratch/wrfhydro:/tmp/wrfhydro

@@ -7,10 +7,12 @@ RUN apt-get update \
 &&  apt-get install -y \
         python3.7  \
         python3-pip \
-        libtk
+        # tkinder is not installing via pip3 for ubuntu
+        python3-tk \
+        libtk \
 
 # install numpy before gdal
-RUN pip3 install numpy pyproj netCDF4 whitebox 
+RUN pip3 install numpy pyproj netCDF4 whitebox
 
 RUN apt-get install -y gdal-bin libgdal-dev
 RUN pip3 install gdal==$(gdal-config --version) \
